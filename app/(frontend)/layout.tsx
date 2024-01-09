@@ -2,18 +2,18 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-	title: "Friedly Advisor",
-	description: "Make NSU Advising Phase Easier with Automation",
+  title: "Friedly Advisor",
+  description: "Make NSU Advising Phase Easier with Automation",
 };
 
 export default function RootLayout({
-	children,
+  children,
 }: {
-	children: React.ReactNode;
+  children: React.ReactNode;
 }) {
-	return (
-		<html lang="en" className="bg-slate-200">
-			<body>{children}</body>
-		</html>
-	);
+  return (
+    <html lang="en" className="bg-[#CDF5FD]">
+      <body>{children}</body>
+    </html>
+  );
 }
