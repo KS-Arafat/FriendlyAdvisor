@@ -1,6 +1,5 @@
 import Image from "next/image";
 import CourseField from "./CourseField";
-import Testanimation from "./testanimation";
 import { cookies } from "next/headers";
 import coursesList from "@/utils/getCourseList";
 import { redirect } from "next/navigation";
