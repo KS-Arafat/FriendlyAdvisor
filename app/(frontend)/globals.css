@@ -271,4 +271,15 @@
     cursor: pointer;
     border: none;
   }
+  .special-article {
+    background: linear-gradient(
+      to right,
+      hsl(278, 100%, 54%),
+      hsla(64, 100%, 50%, 0.479)
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+  }
 }
