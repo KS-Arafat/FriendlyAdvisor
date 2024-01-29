@@ -282,4 +282,73 @@
     -webkit-text-fill-color: transparent;
     text-align: center;
   }
+  @keyframes mypulse {
+    50% {
+      opacity: 0.1;
+    }
+  }
+  .anim-delay-0 {
+    animation-delay: 0ms!;
+    -moz-animation-delay: 0ms!;
+    animation: mypulse 2s infinite;
+  }
+  .anim-delay-200 {
+    animation-delay: 500ms!;
+    -moz-animation-delay: 500ms!;
+    animation: mypulse 2s infinite;
+  }
+  .anim-delay-400 {
+    animation-delay: 1000ms!;
+    -moz-animation-delay: 1000ms!;
+    animation: mypulse 2s infinite;
+  }
+  .anim-delay-600 {
+    animation-delay: 1500ms!;
+    -moz-animation-delay: 1500ms!;
+    animation: mypulse 2s infinite;
+  }
+  .anim-delay-800 {
+    animation-delay: 2000ms!;
+    -moz-animation-delay: 2000ms!;
+    animation: mypulse 2s infinite;
+  }
+  .anim-delay-1000 {
+    animation-delay: 2500ms!;
+    -moz-animation-delay: 2500ms!;
+    animation: mypulse 2s infinite;
+  }
+  .anim-delay-1200 {
+    animation-delay: 3000ms!;
+    -moz-animation-delay: 3000ms!;
+    animation: mypulse 2s infinite;
+  }
+  .anim-delay-1400 {
+    animation-delay: 3500ms!;
+    -moz-animation-delay: 3500ms!;
+    animation: mypulse 2s infinite;
+  }
+  .anim-delay-1600 {
+    animation-delay: 4000ms;
+    -moz-animation-delay: 4000ms!;
+    animation: mypulse 2s infinite;
+  }
+  .anim-delay-1800 {
+    animation-delay: 4500ms;
+    animation: mypulse 2s infinite;
+  }
+  .anim-delay-2000 {
+    animation-delay: 5000ms;
+    -webkit-animation-delay: 5000ms;
+    -moz-animation-delay: 5000ms;
+    -o-animation-delay: 5000ms;
+    animation-name: mypulse;
+    animation: mypulse 2s infinite;
+  }
+  .bg-animation {
+    background-image: linear-gradient(to top right, #0b60b0, #f0edcf);
+    transition: background-image 3s ease;
+  }
+  .bg-animation:hover {
+    background-image: linear-gradient(to bottom left, #0b60b0, #f0edcf);
+  }
 }
