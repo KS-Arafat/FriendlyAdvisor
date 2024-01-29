@@ -23,7 +23,7 @@ const CourseField = ({ className }: { className?: string }) => {
         }
 
         const data = await response.json();
-        console.log(data);
+        //console.log(data);
 
         setSuggestions(data.suggestions);
       } catch (error) {

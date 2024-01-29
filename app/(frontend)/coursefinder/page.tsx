@@ -52,7 +52,7 @@ export default function coursefinder({
   } catch (error) {
     cookie.set(cookieName, JSON.stringify([]));
   }
-  console.log(takencourse);
+  //console.log(takencourse);
 
   return (
     <div className="flex flex-col items-center overflow-visible">
