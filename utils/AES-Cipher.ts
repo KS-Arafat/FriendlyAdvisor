@@ -1,4 +1,4 @@
-import { createCipheriv, createDecipheriv, createHmac } from "crypto";
+import { Cipher, createCipheriv, createDecipheriv, createHmac } from "crypto";
 // Custom Session Generator
 
 const aesOpt = {
@@ -47,7 +47,7 @@ const DecryptSession = (cipherData: cipherType): string | { error: string } => {
   return { error: "Decryption failed" };
 };
 
-const IntegrityChecker = (cipherData: cipherType) => {
+const NonEdgeIntegrityChecker = (cipherData: cipherType) => {
   const hmac = createHmac("sha256", aesOpt.PK);
   hmac.update(Buffer.from(cipherData.EncryptedText, "hex"));
   const integrityTag = hmac.digest("hex");
@@ -57,4 +57,41 @@ const IntegrityChecker = (cipherData: cipherType) => {
   return integrityTag == cipherData.Tag;
 };
 
-export { EncryptSession, DecryptSession, IntegrityChecker };
+const EdgeIntegrityChecker = async (cipherData: cipherType) => {
+  try {
+    const keyBuffer = new TextEncoder().encode(aesOpt.PK.toString());
+    const importedKey = await crypto.subtle.importKey(
+      "raw",
+      keyBuffer,
+      { name: "HMAC", hash: { name: "SHA-256" } },
+      false,
+      ["sign"],
+    );
+
+    const encryptedTextBuffer = Uint8Array.from(
+      Buffer.from(cipherData.EncryptedText, "hex"),
+    );
+
+    const integrityTagBuffer = await crypto.subtle.sign(
+      { name: "HMAC", hash: { name: "SHA-256" } },
+      importedKey,
+      encryptedTextBuffer,
+    );
+
+    const integrityTag = Array.from(new Uint8Array(integrityTagBuffer))
+      .map((byte) => byte.toString(16).padStart(2, "0"))
+      .join("");
+
+    return integrityTag === cipherData.Tag;
+  } catch (error) {
+    console.error("Error calculating integrity:", error);
+    return false;
+  }
+};
+
+export {
+  EncryptSession,
+  DecryptSession,
+  NonEdgeIntegrityChecker,
+  EdgeIntegrityChecker,
+};
