@@ -1,19 +1,12 @@
-import { redirect } from "next/navigation";
+import UserAuth from "@/server/UserAuth";
+import AuthClass from "@/utils/AuthAPI";
+import { cookies } from "next/headers";
 
-import ellip from "elliptic";
+export default function Login({ searchParams: { error } }: any) {
+  console.log(error);
 
-const UserAuth = async (formdata: FormData) => {
-  "use server";
-  const ec = new ellip.ec("secp256k1");
-  //console.log(formdata);
-  console.log(process.env.private_key);
-
-  redirect("/coursefinder");
-};
-
-export default function Login() {
   return (
-    <main className="grid h-full grid-cols-1  place-items-center">
+    <div className="grid h-full grid-cols-1  place-items-center">
       <p
         key={Math.random()}
         className="flex w-11/12 justify-center rounded-3xl border-b-2 border-dashed border-[#00A9FF] pb-2 pt-5 text-center font-serif text-3xl font-extrabold text-[#00A9FF]"
@@ -27,7 +20,10 @@ export default function Login() {
       </p>
       <form
         className="mt-5 grid w-9/12 grid-cols-1 place-items-center rounded-md bg-[#89CFF3] pl-3 pr-3 pt-5 shadow-md shadow-[#9ddefffd] sm:w-6/12"
-        action={UserAuth}
+        action={async (formData) => {
+          "use server";
+          await UserAuth(formData);
+        }}
       >
         <div className="w-full p-2">
           <label
@@ -69,6 +65,6 @@ export default function Login() {
           </button>
         </div>
       </form>
-    </main>
+    </div>
   );
 }
