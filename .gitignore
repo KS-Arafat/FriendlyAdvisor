@@ -38,3 +38,6 @@ next-env.d.ts
 # Temporary Images
 /server/temp/*
 !/server/temp/temp.txt
+
+# Trainded Data
+*.traineddata
