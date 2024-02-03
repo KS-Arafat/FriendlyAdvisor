@@ -25,8 +25,8 @@ const FilterImage = async (buffer: Buffer, rootImgPath: string) => {
     const startX = i * segmentWidth;
     const segment = img.clone().crop(startX, 0, segmentWidth, height);
 
-    segment.write(`${rootImgPath}/seg${i + 1}.png`);
-    imgFile.push(`${rootImgPath}/seg${i + 1}.png`);
+    imgFile.push(`${rootImgPath}seg${i + 1}.png`);
+    segment.write(imgFile[i]);
   }
   return imgFile;
 };

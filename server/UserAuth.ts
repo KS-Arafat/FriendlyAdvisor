@@ -12,7 +12,7 @@ import scanCaptcha from "@/utils/image-processing/segmentedOCR";
 import { EncryptSession } from "@/utils/AES-Cipher";
 
 // constants
-const rootImagePath = "./server/temp";
+const rootImagePath = "./";
 
 // Fetch for get Captcha image
 const fetchCaptcha = () =>
