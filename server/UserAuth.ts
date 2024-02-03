@@ -13,7 +13,6 @@ import { EncryptSession } from "@/utils/AES-Cipher";
 
 // constants
 const rootImagePath = "./server/temp";
-const cookieStore = cookies();
 
 // Fetch for get Captcha image
 const fetchCaptcha = () =>
@@ -31,6 +30,7 @@ const fetchCaptcha = () =>
   });
 
 const UserAuth = async (formdata: FormData) => {
+  const cookieStore = cookies();
   const user_id = formdata.get("s_id")?.toString(),
     user_pwd = formdata.get("s_pwd")?.toString();
 
