@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
+import { NextRequest } from "next/server";
+import { EdgeIntegrityChecker } from "./utils/AES-Cipher";
 
 export const config = {
   api: {
@@ -7,12 +8,17 @@ export const config = {
       sizeLimit: "1mb",
     },
   },
-  matcher: [
-    // "/coursefinder",
-  ],
+  matcher: ["/coursefinder", "/watch"],
 };
 export const middleware = async (req: NextRequest) => {
   console.log("middleware");
-  // if (req.nextUrl.pathname.includes("/api/"))
-  return NextResponse.redirect(new URL("/", req.url));
+  const cookieStore = req.cookies;
+  const enMsg = cookieStore.get("csrf_cookie_name")?.value;
+  const userTag = cookieStore.get("PHPSESSID")?.value;
+
+  if (enMsg && userTag)
+    if (await EdgeIntegrityChecker({ EncryptedText: enMsg, Tag: userTag }))
+      return NextResponse.redirect(new URL(req.nextUrl));
+  cookieStore.clear();
+  return NextResponse.redirect(new URL("/login?error=4", req.url));
 };
