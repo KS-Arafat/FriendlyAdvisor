@@ -1,9 +1,7 @@
 import UserAuth from "@/server/UserAuth";
-import AuthClass from "@/utils/AuthAPI";
-import { cookies } from "next/headers";
 
 export default function Login({ searchParams: { error } }: any) {
-  console.log(error);
+  // console.log(error);
 
   return (
     <div className="grid h-full grid-cols-1  place-items-center">
@@ -20,10 +18,8 @@ export default function Login({ searchParams: { error } }: any) {
       </p>
       <form
         className="mt-5 grid w-9/12 grid-cols-1 place-items-center rounded-md bg-[#89CFF3] pl-3 pr-3 pt-5 shadow-md shadow-[#9ddefffd] sm:w-6/12"
-        action={async (formData) => {
-          "use server";
-          await UserAuth(formData);
-        }}
+        // @ts-ignore
+        action={UserAuth}
       >
         <div className="w-full p-2">
           <label

@@ -11,7 +11,6 @@ export const config = {
   matcher: ["/coursefinder", "/watch"],
 };
 export const middleware = async (req: NextRequest) => {
-  console.log("middleware");
   const cookieStore = req.cookies;
   const enMsg = cookieStore.get("csrf_cookie_name")?.value;
   const userTag = cookieStore.get("PHPSESSID")?.value;
