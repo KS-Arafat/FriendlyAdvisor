@@ -12,7 +12,7 @@ import scanCaptcha from "@/utils/image-processing/segmentedOCR";
 import { EncryptSession } from "@/utils/AES-Cipher";
 
 // constants
-const rootImagePath = "./";
+const rootImagePath = "./temp/";
 
 // Fetch for get Captcha image
 const fetchCaptcha = () =>
@@ -34,7 +34,7 @@ const UserAuth = async (formdata: FormData) => {
   const user_id = formdata.get("s_id")?.toString(),
     user_pwd = formdata.get("s_pwd")?.toString();
 
-  console.log(user_id, user_pwd);
+  // console.log(user_id, user_pwd);
   if (!user_id || !user_pwd || user_id.length != 7) redirect("/login?error=1");
   const userData = new AuthClass({
     u_id: user_id,
@@ -64,14 +64,17 @@ const UserAuth = async (formdata: FormData) => {
   userData.enUID = user_eid;
 
   ////////// OCR CAPTCHA ///////////////////////////
-  userData.captcha = await scanCaptcha(imgPATHS);
+  try {
+    while (userData.captcha?.length != 4)
+      userData.captcha = await scanCaptcha(imgPATHS);
+  } catch (error) {}
 
   ////////// LOGIN ///////////////////////////
-  const loginPage = await userData.loginFetch();
+  let loginPage = await userData.loginFetch();
 
   ///////// USERNAME EXTRACTION //////////////
 
-  writeFileSync("./server/temp/login.html", loginPage);
+  writeFileSync(`${rootImagePath}/login.html`, loginPage);
   const $ = load(loginPage);
   let userName = $(".white").text();
 
