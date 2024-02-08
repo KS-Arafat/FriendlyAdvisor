@@ -1,7 +1,17 @@
 import React from "react";
-import { MuseoModerno, Tourney } from "next/font/google";
-const muse = MuseoModerno({ subsets: ["latin"] });
-const tour = Tourney({ subsets: ["latin"] });
+import LocalFont from "next/font/local";
+
+const protest = LocalFont({
+  src: "./ProtestGuerrilla-Regular.ttf",
+  variable: "--Protest",
+});
+
+const roboto = LocalFont({
+  src: "./Roboto-Medium.ttf",
+  variable: "--Roboto",
+  weight: "200",
+});
+
 type courseInfo = {
   name: string;
   section: number;
@@ -17,40 +27,42 @@ const Watch = () => {
   return (
     <div className="grid h-5/6 grid-cols-1 place-items-center">
       <h1
-        className={`${muse.className} special-article pt-4 text-3xl font-bold uppercase mix-blend-difference`}
+        className={`${protest.className} special-article mt-9 text-5xl font-bold uppercase mix-blend-difference`}
       >
         W a t c h e r
       </h1>
 
       <div className="bg grid w-11/12 grid-cols-1 pt-10 sm:w-7/12">
         <div
-          className={`${tour.className} grid grid-cols-3 rounded-b-sm rounded-t-lg bg-gradient-to-tr from-cyan-400 to-emerald-100 p-1 text-center text-xl font-semibold text-amber-300 bg-blend-color-dodge`}
+          className={`${roboto.className} group/th m-0 grid grid-cols-3 overflow-hidden rounded-b-sm rounded-t-lg transition-all`}
         >
-          <p className="mix-blend-difference">Name</p>
-          <p className="mix-blend-difference">Section</p>
-          <p className="mix-blend-difference">Seats</p>
+          <p className="bg-cyan-500 p-1 text-center text-xl text-yellow-50 bg-blend-color-dodge transition-all duration-500 ease-in-out group-hover/th:rounded-lg group-hover/th:hover:rounded-full group-hover/th:hover:bg-cyan-300 group-hover/th:hover:text-amber-500">
+            Name
+          </p>
+          <p className="bg-cyan-500 p-1 text-center text-xl text-yellow-50 bg-blend-color-dodge transition-all duration-500 ease-in-out group-hover/th:rounded-lg group-hover/th:hover:rounded-full group-hover/th:hover:bg-cyan-300 group-hover/th:hover:text-amber-500">
+            Section
+          </p>
+          <p className="bg-cyan-500 p-1 text-center text-xl text-yellow-50 bg-blend-color-dodge transition-all duration-500 ease-in-out group-hover/th:rounded-lg group-hover/th:hover:rounded-full group-hover/th:hover:bg-cyan-300 group-hover/th:hover:text-amber-500">
+            Seats
+          </p>
         </div>
         {courses.map((e) => {
           return (
             <div
               key={Math.random()}
-              className={`mt-1 grid grid-cols-3 rounded-sm bg-gradient-to-bl p-1 text-center text-xl uppercase sm:mt-2 
-                ${
-                  e.emptyseat <= 0
-                    ? " from-red-200 from-35% to-rose-500"
-                    : " from-green-200 from-35% to-emerald-500"
-                }`}
+              className={`mt-1 grid grid-cols-3 rounded-sm p-1 text-center text-xl uppercase sm:mt-2 
+                ${e.emptyseat <= 0 ? " bg-rose-300" : " bg-emerald-300"}`}
             >
               <p
                 draggable="false"
-                className="font-semibold text-teal-100 mix-blend-lighten"
+                className="font-semibold text-purple-900 mix-blend-luminosity"
               >
                 {e.name}
               </p>
-              <p className="font-semibold text-sky-500 mix-blend-luminosity">
+              <p className="font-semibold text-sky-950 mix-blend-luminosity">
                 {e.section}
               </p>
-              <p className="font-semibold text-yellow-600 mix-blend-luminosity">
+              <p className="font-semibold text-yellow-950 mix-blend-luminosity">
                 {e.emptyseat}
               </p>
             </div>
